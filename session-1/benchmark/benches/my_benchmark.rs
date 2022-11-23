@@ -37,13 +37,13 @@ fn criterion_benchmark(c: &mut Criterion) {
     let pub_key = RsaPublicKey::from(&priv_key);
     let data = b"hello world";
 
-    c.bench_function("rsa-encrypt 'hello_world'", |b| {
+    c.bench_function("rsa-encrypt 'oaep-sha256'", |b| {
         b.iter(|| rsa_encrypt(&mut rng, &pub_key, black_box(data)))
     });
 
     //let mut oaep = rsa_oaep_pss::RsaOaep::new(rand::rngs::OsRng, &Sha256::new());
     let (public_key, _private_key) = generate_rsa_keys(&mut rng.clone(), bits).unwrap();
-    c.bench_function("rsa_oaep_pss-encrypt 'hello_world'", |b| {
+    c.bench_function("rsa_oaep_pss-encrypt 'oaep-sha256'", |b| {
         b.iter(|| rsa_oaep_pss_encrypt(&mut rng, &public_key, black_box(data)))
     });
 }
