@@ -77,9 +77,34 @@
 - Benchmark the speed of an algorithm in the two different implementations with [Criterion](https://lib.rs/crates/criterion).
 
 > **Solution:**
+>
+> For this exercise, I decided to benchmark two rsa-oaep algorithms from
+>
+> - [RSA](https://github.com/RustCrypto/RSA) by @RustCrypto, and
+> - [rsa-oaep-pss](https://github.com/hakhenaton/rsa-oaep-pss/) by @Hakhenaton
+>
+> The details of the benchmark can be found in the Readme file [here](https://github.com/srdtrk/open-cryptography-course/tree/main/session-1/benchmark). Surprisingly, the more mature package turned out to be about 2.6 times slower than the latter. I'd still use the more mature package because I choose security over performance.
+
 - You're implementing a [Tweakable Encryption](https://en.wikipedia.org/wiki/Disk_encryption_theory) scheme. You need to know what standard API users will expect. Find a reference for the standard API and write the function signatures for encryption and decryption.
+
+> **No Solution: This exercise was depreciated.**
+
 - You want to understand a paper on a new polynomial commitment scheme, but you've been trying for more than an hour, and the math is over your head. What do you do?
+
+> Study the math or ask a colleague that know more about it.
+
 - Implement the [Vignère cipher](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher) in 100 lines or less.
+
+> **Solution:**
+>
+> https://github.com/srdtrk/vigenere-cipher
+
 - What is a side channel attack? Is your cipher implementation constant time?
+
+> **Solution:**
+>
+> A side-channel attack is when the attacker has one or more additional channels of information about the system. For example (from $\S$ 8.5), an attacker that can make detailed measurements of the time it takes to encrypt a message.
+>
+> No, the longer the message is, the longer it takes to encrypt it. Our vigenere cipher should be linear in time with respect to the length of the plaintext.
 - Extra: Read [New Directions in Cryptography](https://ieeexplore.ieee.org/document/1055638).
 - Extra: Consider ways to contribute what you learned this week to the [Uncloak](https://uncloak.org) knowledge graph.
