@@ -16,11 +16,11 @@
 
 > **Solution:**
 >
-> $\sum_{i=1}^{30}(30-i) = 210$.
+> $$\sum_{i=1}^{30} (30-i) = 210$$
 >
 > In general, for $n$ people, a total of $\frac{1}{2}n(n-1)$ keys need to be exchanged.
 >
-> $\sum_{i=1}^{n}(n-i) = \frac{1}{2}n(n-1)$.
+> $$\sum_{i=1}^{n} (n-i) = \frac{1}{2}n(n-1)$$
 
 - **Q4.** Suppose Bob receives a messages signed using a digital signature scheme with Alice's secret signing key. Does it prove that Alice saw the message and chose to sign.
 
