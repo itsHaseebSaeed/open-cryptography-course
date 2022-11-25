@@ -16,7 +16,7 @@
 
 > **Solution:**
 >
-> $$\sum_{i=1}^{30} (30-i) = 210$$
+> $$\sum_{i=1}^{30} (30-i) = 435$$
 >
 > In general, for $n$ people, a total of $\frac{1}{2}n(n-1)$ keys need to be exchanged.
 >
