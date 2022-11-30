@@ -17,8 +17,8 @@
 >**Solution:**
 >
 > DES has a key size of 56 bits. Suppose we run our exhaustive search without any key repetition (as we should). Let $N$ be the number of searches we have to run until we find the match. Then,
-> $$ \mathbb P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}$$
-> $$ \therefore\mathbb E(N) = \sum_{i=1}^{2^{56}} i\cdot\frac{1}{2^{56}} = \frac{2^{56}+1}{2}\approx 2^{55}$$
+> $$P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}$$
+> $$\therefore\mathbb E(N) = \sum_{i=1}^{2^{56}} i\cdot\frac{1}{2^{56}} = \frac{2^{56}+1}{2}\approx 2^{55}$$
 > Thus, with one processor, it would take about
 > $$ 2^{29}\text{ seconds} \approx 149130\text{ hours.}$$
 > Now suppose that $2^{14}$ processors divide the search space evenly among each other. This would mean effectively the search space is reduced to $2^{56-14} = 2^{42}$. Then, the expected number of trials the winning processor has to go through is
@@ -37,8 +37,8 @@
 > Let $C$ be the ciphertext of $P$, and $(L_C, R_C)$ be the splitting of $C$ with the same algoritm used to split $P$.
 >
 > Then notice that, according to DES2, we have:
-> $$ F(K_1, R_P) = L_P\ \oplus\ R_C$$
-> and, $$ F(K_2, R_C) = R_P\ \oplus\ L_C$$
+> $$F(K_1, R_P) = L_P\ \oplus\ R_C$$
+> and, $$F(K_2, R_C) = R_P\ \oplus\ L_C$$
 > Thus we can simply brute force $K_1$, and $K_2$. In this case, we have at most $2^{48}$ unique keys to go through (not $2^{49}$ since we can brute force both rounds at the same time), and in the case of standard exhaustive search this would have been $2^{56}$, so indeed, this is more efficient.
 >
 > And this algorithm (I will not provide a pseudocode as I think the above description suffices), can be turned into a distinguishing attack. Let's show why. Suppose we have two block ciphers (on same block size and key size). First, we pick a random key, then we use this key to generate plaintext ciphertext pairs. Then we compute $K_1$ and $K_2$ using the public key scheduling algorithm. Then we check whether:
