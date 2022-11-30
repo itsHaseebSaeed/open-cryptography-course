@@ -17,14 +17,14 @@
 >**Solution:**
 >
 > DES has a key size of 56 bits. Suppose we run our exhaustive search without any key repetition (as we should). Let $N$ be the number of searches we have to run until we find the match. Then,
-> $$ \mathbb P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}.$$
-> $$ \therefore\mathbb E(N) = \sum_{i=1}^{2^{56}} i\cdot\frac{1}{2^{56}} = \frac{2^{56}+1}{2}\approx 2^{55}.$$
+> $$ \mathbb P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}$$
+> $$ \therefore\mathbb E(N) = \sum_{i=1}^{2^{56}} i\cdot\frac{1}{2^{56}} = \frac{2^{56}+1}{2}\approx 2^{55}$$
 > Thus, with one processor, it would take about
 > $$ 2^{29}\text{ seconds} \approx 149130\text{ hours.}$$
 > Now suppose that $2^{14}$ processors divide the search space evenly among each other. This would mean effectively the search space is reduced to $2^{56-14} = 2^{42}$. Then, the expected number of trials the winning processor has to go through is
-> $$ \therefore\mathbb E(N) \approx 2^{41}. $$
+> $$ \therefore\mathbb E(N) \approx 2^{41}$$
 > Therefore, it would take about
-> $$ 2^{15}\text{ seconds} \approx 9.1\text{ hours}.$$
+> $$ 2^{15}\text{ seconds} \approx 9.1\text{ hours}$$
 
 - **Q6.** Consider a new block cipher, DES2, that consists only of two rounds of the DES block cipher. DES2 has the same block and key size as DES. For this question you should consider the DES $F$ function as a black box that takes two inputs, a 32-bit data segment and a 48-bit round key, and that produces a 32-bit output. Suppose you have a large number of plaintext-ciphertext pairs for DES2 under a single, unknown key. **Give** an algorithm for recovering the 48-bit round key for round 1 and the 48-bit round key for round 2. Your algorithm should require fewer operations than an exhaustive search for an entire 56-bit DES key. Can your algorithm be converted into a distinguishable attack against DES2?
 
