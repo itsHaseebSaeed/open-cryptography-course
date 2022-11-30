@@ -63,7 +63,7 @@ using AES.
 
 >**Solution:**
 >
-> This is decrypted in [here](). It is `80706050403020100807060504030201`
+> This is decrypted in [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/openssl-example/src/main.rs). It is `80706050403020100807060504030201`
 
 **Q9.** Using an existing cryptography library, encrypt the following plaintext (in hex)
 
@@ -75,4 +75,4 @@ with the following 256-bit key from problem 8, using AES. Then re-encrypt and de
 
 >**Solution:**
 >
-> The plaintext is encrypted [here](). It is `80000000000000000000000000000001`. We used gpg to produce [encrypted.gpg]() from [gpg-plaintext.txt]()
+> The plaintext is encrypted [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/openssl-example/src/main.rs). It is `80000000000000000000000000000001`. We used gpg to produce [encrypted.gpg](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/encrypted.gpg) from [gpg-plaintext.txt](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/gpg-plaintext.txt)
