@@ -75,4 +75,4 @@ with the following 256-bit key from problem 8, using AES. Then re-encrypt and de
 
 >**Solution:**
 >
-> The plaintext is encrypted [here](). It is `80000000000000000000000000000001`.
+> The plaintext is encrypted [here](). It is `80000000000000000000000000000001`. We used gpg to produce [encrypted.gpg]() from [gpg-plaintext.txt]()
