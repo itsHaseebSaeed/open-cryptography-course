@@ -48,13 +48,13 @@
 
 **Q8.** Familiarize yourself with a cryptographic CLI tools. A popular open source package is [OpenSSL](https://docs.rs/openssl/latest/openssl/aes/index.html). Using an existing cryptographic library, decrypt the following ciphertext (in hex)
 
-```hex
+```ignore
 53 9B 33 3B 39 70 6D 14 90 28 CF E1 D9 D4 A4 07
 ```
 
  with the following 256-bit key (also in hex):
 
-```hex
+```ignore
 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
 ```
@@ -63,4 +63,16 @@ using AES.
 
 >**Solution:**
 >
+> This is decrypted in [here](). It is `80706050403020100807060504030201`
+
+**Q9.** Using an existing cryptography library, encrypt the following plaintext (in hex)
+
+```ignore
+29 6C 93 FD F4 99 AA EB 41 94 BA BC 2E 63 56 1D
+```
+
+with the following 256-bit key from problem 8, using AES. Then re-encrypt and decrypt it using a 3072-bit RSA key with GnuPG, or your choice of asymmetric crypto CLI.
+
+>**Solution:**
 >
+> The plaintext is encrypted [here](). It is `80000000000000000000000000000001`.
