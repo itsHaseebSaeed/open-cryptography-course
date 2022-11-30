@@ -9,7 +9,7 @@
 > For a fixed key, an entire idealized block cipher that operates on n-bit blocks require
 > $$2^n\cdot n$$
 > bits of storage. We have to store a block cipher for each key possible key, thus we need a total of,
-> $$ 2^{80}\cdot 2^{64}\cdot 64 $$
+> $$2^{80}\cdot 2^{64}\cdot 64 $$
 > bits of storage. Which is a number so large that I don't even know a proper name for it.
 
 - **Q5.** Suppose you have a processor that can perform a single DES encryption or decryption operation in $2^{-26}$ seconds. Suppose you also have a large number of plaintext-ciphertext pairs for DES under a single unknown key. How many hours would it take, on average, to find that DES key, using an exhaustive search approach and a single processor? How many hours would it take, with a collection of $2^{14}$ processors?
@@ -17,14 +17,14 @@
 >**Solution:**
 >
 > DES has a key size of 56 bits. Suppose we run our exhaustive search without any key repetition (as we should). Let $N$ be the number of searches we have to run until we find the match. Then,
-> $$P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}$$
+> $$\mathbb P(N=i) = \frac{1}{2^{56}} \text{ for } 1\leq i\leq 2^{56}$$
 > $$\therefore\mathbb E(N) = \sum_{i=1}^{2^{56}} i\cdot\frac{1}{2^{56}} = \frac{2^{56}+1}{2}\approx 2^{55}$$
 > Thus, with one processor, it would take about
-> $$ 2^{29}\text{ seconds} \approx 149130\text{ hours.}$$
+> $$2^{29}\text{ seconds} \approx 149130\text{ hours.}$$
 > Now suppose that $2^{14}$ processors divide the search space evenly among each other. This would mean effectively the search space is reduced to $2^{56-14} = 2^{42}$. Then, the expected number of trials the winning processor has to go through is
-> $$ \therefore\mathbb E(N) \approx 2^{41}$$
+> $$\therefore\mathbb E(N) \approx 2^{41}$$
 > Therefore, it would take about
-> $$ 2^{15}\text{ seconds} \approx 9.1\text{ hours}$$
+> $$2^{15}\text{ seconds} \approx 9.1\text{ hours}$$
 
 - **Q6.** Consider a new block cipher, DES2, that consists only of two rounds of the DES block cipher. DES2 has the same block and key size as DES. For this question you should consider the DES $F$ function as a black box that takes two inputs, a 32-bit data segment and a 48-bit round key, and that produces a 32-bit output. Suppose you have a large number of plaintext-ciphertext pairs for DES2 under a single, unknown key. **Give** an algorithm for recovering the 48-bit round key for round 1 and the 48-bit round key for round 2. Your algorithm should require fewer operations than an exhaustive search for an entire 56-bit DES key. Can your algorithm be converted into a distinguishable attack against DES2?
 
@@ -42,8 +42,8 @@
 > Thus we can simply brute force $K_1$, and $K_2$. In this case, we have at most $2^{48}$ unique keys to go through (not $2^{49}$ since we can brute force both rounds at the same time), and in the case of standard exhaustive search this would have been $2^{56}$, so indeed, this is more efficient.
 >
 > And this algorithm (I will not provide a pseudocode as I think the above description suffices), can be turned into a distinguishing attack. Let's show why. Suppose we have two block ciphers (on same block size and key size). First, we pick a random key, then we use this key to generate plaintext ciphertext pairs. Then we compute $K_1$ and $K_2$ using the public key scheduling algorithm. Then we check whether:
-> $$ F(K_1, R_P) = L_P\ \oplus\ R_C$$
-> and, $$ F(K_2, R_C) = R_P\ \oplus\ L_C$$
+> $$F(K_1, R_P) = L_P\ \oplus\ R_C$$
+> and, $$F(K_2, R_C) = R_P\ \oplus\ L_C$$
 > for whichever block cipher this is false, it must be the ideal block cipher.
 
 **Q8.** Familiarize yourself with a cryptographic CLI tools. A popular open source package is [OpenSSL](https://docs.rs/openssl/latest/openssl/aes/index.html). Using an existing cryptographic library, decrypt the following ciphertext (in hex)
