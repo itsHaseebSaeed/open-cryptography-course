@@ -4,7 +4,7 @@ use openssl::symm::{Cipher, Mode};
 use rustc_serialize::hex::ToHex;
 
 fn main() {
-    let cipher = Cipher::aes_256_ecb();
+    let cipher = Cipher::aes_256_cbc();
     let key_hex = b"\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01";
 
     // --------------------- Answer to 3.8 ----------------------------
@@ -16,7 +16,7 @@ fn main() {
 
     decrypter.update(ciphertext, &mut output).unwrap();
 
-    let plaintext = &output[0..16];
+    let plaintext = &output[..16];
 
     println!("Answer to 3.8: {:?}", plaintext.to_hex());
 
@@ -34,4 +34,22 @@ fn main() {
     let new_ciphertext = &new_output[0..16];
 
     println!("Answer to 3.9(a): {:?}", new_ciphertext.to_hex());
+
+    // -------------------- Answer to 4.4 -----------------------------
+
+    //let iv = b"\x87\xF3\x48\xFF\x79\xB8\x11\xAF\x38\x57\xD6\x71\x8E\x5F\x0F\x91";
+    let new_key = b"\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01";
+    let raw_ciphertext = b"\x87\xF3\x48\xFF\x79\xB8\x11\xAF\x38\x57\xD6\x71\x8E\x5F\x0F\x91\x7C\x3D\x26\xF7\x73\x77\x63\x5A\x5E\x43\xE9\xB5\xCC\x5D\x05\x92\x6E\x26\xFF\xC5\x22\x0D\xC7\xD4\x05\xF1\x70\x86\x70\xE6\xE0\x17";
+    let iv = &raw_ciphertext[..16];
+    let real_ciphertext = &raw_ciphertext[16..48];
+    let mut output: Vec<u8> = vec![0x0; 64];
+
+    let mut iv_decrypter = Crypter::new(cipher, Mode::Decrypt, new_key, Some(iv)).unwrap();
+    iv_decrypter.pad(false);
+
+    iv_decrypter.update(real_ciphertext, &mut output).unwrap();
+
+    let iv_plaintext = &output[..32];
+
+    println!("Answer to 4.4: {:?}", iv_plaintext.to_hex());
 }
