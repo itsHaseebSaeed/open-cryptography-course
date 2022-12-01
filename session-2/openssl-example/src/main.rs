@@ -35,6 +35,41 @@ fn main() {
 
     println!("Answer to 3.9(a): {:?}", new_ciphertext.to_hex());
 
+    // -------------------- Answer to 3.10 ----------------------------
+
+    let des_key = b"\x80\x0e\x00\x20\x00\x0f\x00\x00";
+    let des_cipher = Cipher::des_cbc();
+
+    let des_plaintext = b"\x29\x6C\x93\xFD\xF4\x99\xAA\xEB";
+    let mut des_output: Vec<u8> = vec![0x0; 16];
+
+    let mut des_encrypter = Crypter::new(des_cipher, Mode::Decrypt, des_key, None).unwrap();
+    des_encrypter.pad(false);
+
+    des_encrypter
+        .update(des_plaintext, &mut des_output)
+        .unwrap();
+
+    let des_ciphertext = Vec::from(&des_output[..8]);
+
+    let comp_key: Vec<u8> = des_key.iter().map(|x| !x).collect();
+    let comp_plaintext: Vec<u8> = des_plaintext.iter().map(|x| !x).collect();
+
+    let mut comp_encrypter = Crypter::new(des_cipher, Mode::Decrypt, &comp_key, None).unwrap();
+    comp_encrypter.pad(false);
+
+    comp_encrypter
+        .update(&comp_plaintext, &mut des_output)
+        .unwrap();
+
+    let comp_ciphertext = Vec::from(&des_output[..8]);
+
+    assert_eq!(
+        comp_ciphertext.iter().map(|x| !x).collect::<Vec<u8>>(),
+        des_ciphertext
+    );
+
+    println!("(3.10) DES complementation property test passed.");
     // -------------------- Answer to 4.4 -----------------------------
 
     //let iv = b"\x87\xF3\x48\xFF\x79\xB8\x11\xAF\x38\x57\xD6\x71\x8E\x5F\x0F\x91";

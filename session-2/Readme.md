@@ -79,6 +79,10 @@ with the following 256-bit key from problem 8, using AES. Then re-encrypt and de
 
 **Q10.** Write a program that experimentally demonstrates the complementation property for DES. This program should take as input a key $K$ and a plaintext $P$ and demonstrate that the DES complementation property holds for this key and plaintext. You may use an existing cryptography library for this exercise.
 
+> **Solution:**
+>
+> The test I've written in [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/openssl-example/src/main.rs) passes.
+
 ## Chapter 4 (p. 107)
 
 **Q1.** Let $P$ be a plaintext and let $\ell(P)$ be the length of $P$ in bytes. Let $b$ be the block size of the block cipher in bytes. Explain why the following is not a good padding scheme: 
@@ -118,7 +122,7 @@ What information, if any, can you infer about the plaintext $P'$ corresponding t
 > $$C = P\ \oplus\ K_1$$
 > $$C' = P'\ \oplus\ K_1$$
 > $$\therefore\ C\ \oplus\ C' = P\ \oplus\ P'$$
-> Then, solving for $P'$ gives `54686973206973206120736563726574202020436f6e666964656e7469616c21`.
+> Then, solving for $P'$ gives `54686973206973206120736563726574202020436f6e666964656e7469616c21`. Which when converted to text gives `This is a secret   Confidential!`
 
 **Q4.** The ciphertext (in hex)
 
