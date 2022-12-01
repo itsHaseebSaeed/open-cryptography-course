@@ -158,3 +158,7 @@ using CBC mode with a random IV. The IV is included at the beginning of the ciph
 ## General
 
 - Implement a pair of functions: A [PKCS](https://en.wikipedia.org/wiki/PKCS_7) message padding function, and a padding validation function that takes a message and validates whether it has a correct padding.
+
+> **Solution:**
+>
+> Did this [here](https://github.com/srdtrk/rust-pkcs7-padding).
