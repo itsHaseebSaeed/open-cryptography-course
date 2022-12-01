@@ -145,6 +145,16 @@ using CBC mode with a random IV. The IV is included at the beginning of the ciph
 >
 > This is decrypted in [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-2/openssl-example/src/main.rs). I took the first 16 bytes to be the iv. In which case we have the following plaintext `416e6f7468657220736563726574212020416e6420616e6f746865722e202020`. Which when converted to text gives: `Another secret!  And another.`
 
-**Q6.** Let $P_1$, $P_2$ be a message that is two blocks long, and let $P'_1$ be a message that is one block long. Let $C_0, C_1, C_2$ be the encryption of $P_1, P_2$ using CBC mode with a random IV and a random key, and let $C'_0, C'_1$ be the encryption of $P'_1$ using CBC mode with a random IV and the same key. Suppose an attacker knows $P_1, P_2$ and suppose the attacker intercepted and thus know $C_0, C_1, C_2$ and $C_0, C_1$. Further suppose that, by random chance, $C_1 = C_2$. Show that the attacker can compute $P'_1$.
+**Q6.** Let $P_1$, $P_2$ be a message that is two blocks long, and let $P'_1$ be a message that is one block long. Let $C_0, C_1, C_2$ be the encryption of $P_1, P_2$ using CBC mode with a random IV and a random key, and let $C'_0, C'_1$ be the encryption of $P'_1$ using CBC mode with a random IV and the same key. Suppose an attacker knows $P_1, P_2$ and suppose the attacker intercepted and thus know $C_0, C_1, C_2$ and $C'_0, C'_1$. Further suppose that, by random chance, $C'_1 = C_2$. Show that the attacker can compute $P'_1$.
+
+> **Solution:**
+>
+> We know that
+> $$C'_1 = E(K, P'_1\ \oplus\ C'_0)\text{, and}$$
+> $$C_2 = E(K, P_2\ \oplus\ C_1)$$
+> Then, applying decryption to $C'_1 = C_2$ gives us
+> $$P'_1 = P_2\ \oplus\ C_1\ \oplus\ C'_0$$
+
+## General
 
 - Implement a pair of functions: A [PKCS](https://en.wikipedia.org/wiki/PKCS_7) message padding function, and a padding validation function that takes a message and validates whether it has a correct padding.
