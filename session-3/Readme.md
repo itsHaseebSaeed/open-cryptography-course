@@ -95,3 +95,44 @@ Found 9 outliers among 100 measurements (9.00%)
 ```
 
 ## Chapter 6
+
+**Exercise 6.3** Suppose a and b are both one block long, and suppose the sender MACs a, b, and $a || b$ with CBC-MAC. An attacker who intercepts the MAC tags for these messages can now forge the MAC for the message $m=b || (M(b) ⊕ M(a) ⊕ b)$, which the sender never sent. The forged tag for this message is equal to $M(a || b)$, the tag for $a || b$. Justify mathematically why this is true.
+
+> **Solution**
+>
+> We will prove that both $M(m)$ and $M(a || b)$ are equal to $E_K(M(a)\ \oplus\ b)$.
+>
+> **(i) Proof that $M(a||b) = E_K(M(a)\ \oplus\ b)$**:
+>
+> Let $m' = a||b$ be our plaintext message $P'$. Then since both $a$ and $b$ are one block long, we have $P'_1 = a$ and $P'_2 = b$. Then, by definition:
+> $$M(m') = E_K(b\ \oplus\ H'_1)$$
+> where $H'_1 = E_K(a\ \oplus \text{IV}) = E_K(a) = M(a)$ since $\text{IV}$ is fixed at $0$.
+> $$\therefore M(m') = E_K(b\ \oplus M(a))$$
+>
+> **(ii) Proof that $M(m) = E_K(M(a)\ \oplus\ b)$**: 
+>
+> Let $m$ be our plaintext message $P$. Then since both $b$ and $(M(b) ⊕ M(a) ⊕ b)$ are one block long, we have $P_1 = b$ and $P_2 = M(b) ⊕ M(a) ⊕ b$. Then, by definition
+> $$M(m) = E_K(M(b) ⊕ M(a) ⊕ b\ \oplus\ H_1)$$
+> where $H_1 = E_K(b\ \oplus\ \text{IV}) = E_K(b) = M(b)$ since $\text{IV}$ is fixed at $0$.
+> $$\therefore M(m) = E_K(M(b) ⊕ M(a) ⊕ b\ \oplus\ M(b)) = E_K(M(a)\ \oplus b)$$
+> We are done.
+
+**Exercise 6.4** Suppose message $a$ is one block long. Suppose that an attacker has received the MAC $t$ for $a$ using CBC-MAC under some random key unknown to the attacker. Explain how to forge the MAC for a two-block message of your choice. What is the two-block message that you chose? What is the tag that you chose? Why is your chosen tag a valid tag for your two-block message?
+
+> **Solution:**
+>
+> The message we choose is $m' = a\ ||\ (a\ \oplus\ M(a))$. Here, the first block is $P'_1 = a$, and the second block is $P'_2 = a\ \oplus\ M(a)$. The tag we choose is $t' = t = M(a)$. Here is the proof that this tag matches the CBC-MAC of $m'$:
+>
+> $$M(m') = E_K(P_2\ \oplus H_1) = E_K(a\ \oplus\ M(a)\ \oplus M(a)) = E_K(a) = M(a) = t = t'$$
+
+**Exercise 6.5** Using an existing cryptography library, compute the MAC of the message:
+
+```hex
+4D 41 43 73 20 61 72 65 20 76 65 72 79 20 75 73 65 66 75 6C 20 69 6E 20 63 72 79 70 74 6F 67 72 61 70 68 79 21 20 20 20 20 20 20 20 20 20 20 20
+```
+
+using CBC-MAC with AES and the 256-bit key:
+
+```hex
+80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
+```
