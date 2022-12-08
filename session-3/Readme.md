@@ -1,5 +1,7 @@
 # Session 2 Exercise Solutions - Srdtrk
 
+## Chapter 5
+
 **Exercise 5.3** Consider SHA-512-n, a hash function that first runs SHA-512 and then outputs only the first $n$ bits of the result. Write a program that uses a birthday attack to find and output a collision on SHA-512-n, where n is a multiple of 8 between 8 and 48. Your program may use an existing cryptography library. Time how long your program takes when n is 16, averaged over five runs for each $n.$ How long would you expect your program to take for SHA-512-256? For SHA-512?
 
 > **Solution:**
@@ -67,3 +69,29 @@ Found 2 outliers among 10 measurements (20.00%)
 > **Solution:**
 >
 > I think it would take, on average, $2^{16} = 65536$ tries. In my 5 trials [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-3/sha512-n-birthday/src/lib.rs), I got an average of 84962 tries.
+
+**Exercise+** With command line tools or Criterion, benchmark the [blake3 hash](https://docs.rs/blake3/latest/blake3/) (default is 256 bit output), and compare it to benches of [SHA3-256](https://docs.rs/sha3/latest/sha3/) and [SHA-256](https://docs.rs/sha2/latest/sha2/) (when written without a number, SHA is assumed to be SHA2).
+
+> **Solution:**
+>
+> You can find the benchmark here, and run it with `cargo bench`. We find that blake3 is the fastest with sha2 being a close second, and sha3 being the slowest.
+
+```ignore
+blake3                  time:   [53.667 ns 53.694 ns 53.722 ns]                   
+Found 5 outliers among 100 measurements (5.00%)
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+
+sha2-256                time:   [56.701 ns 56.730 ns 56.761 ns]                     
+Found 6 outliers among 100 measurements (6.00%)
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+
+sha3-256                time:   [327.52 ns 327.71 ns 327.91 ns]                     
+Found 9 outliers among 100 measurements (9.00%)
+  1 (1.00%) low severe
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+```
+
+## Chapter 6
