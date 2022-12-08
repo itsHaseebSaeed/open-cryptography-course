@@ -139,4 +139,14 @@ using CBC-MAC with AES and the 256-bit key:
 
 > **Solution:**
 >
-> According to my computation in [here](), the mac is `0d820e3a1e105d307216fc00c7a5b449`.
+> According to my computation in [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-3/cbc-mac-example/src/main.rs), the mac is `0d820e3a1e105d307216fc00c7a5b449`.
+
+**Exercise+** For message authentication, when would you use TupleHash? ParallelHash? KMAC?
+
+> **Solution**
+>
+> I would use ParallelHash when the messages we are authenticating are very long and speed is important.
+>
+> I would use KMAC when security is most important and when MAC has to meet strict length requirements. KMAC introduces less potential user error as the hash function itself is keyed, unlike the other two listed hash functions. Thus, I'd mostly use KMAC.
+>
+> I can't think of many reasons to use TupleHash.
