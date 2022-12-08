@@ -1,0 +1,16 @@
+use openssl::symm::{Cipher, Crypter, Mode};
+use rustc_serialize::hex::ToHex;
+
+fn main() {
+    let message = b"\x4D\x41\x43\x73\x20\x61\x72\x65\x20\x76\x65\x72\x79\x20\x75\x73\x65\x66\x75\x6C\x20\x69\x6E\x20\x63\x72\x79\x70\x74\x6F\x67\x72\x61\x70\x68\x79\x21\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20";
+    let key = b"\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01";
+
+    let cipher = Cipher::aes_256_cbc();
+
+    let mut new_output: Vec<u8> = vec![0x0; 48];
+    let mut crypter = Crypter::new(cipher, Mode::Encrypt, key, None).unwrap();
+    crypter.pad(false);
+    crypter.update(message, &mut new_output).unwrap();
+
+    println!("Answer to 6.5: {:?}", new_output[32..48].to_hex());
+}

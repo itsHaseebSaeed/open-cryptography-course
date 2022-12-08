@@ -136,3 +136,7 @@ using CBC-MAC with AES and the 256-bit key:
 ```hex
 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
 ```
+
+> **Solution:**
+>
+> According to my computation in [here](), the mac is `0d820e3a1e105d307216fc00c7a5b449`.
