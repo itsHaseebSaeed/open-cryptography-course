@@ -4,7 +4,7 @@
 
 > **Solution:**
 >
-> You can find the attack in [here](). The following is the location of the collision.
+> You can find the attack in [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-3/sha512-n-birthday/src/lib.rs). The following is the location of the collision.
 >
 > ```ignore
 > Collision of sha-512-8 found at (7, 4)
@@ -15,6 +15,7 @@
 > Collision of sha-512-48 found at (29984355, 8978078)
 > ```
 >
+> Based on the results bellow, making an extremely conservative estimate (by many orders of magnitude), at least $10^{20}$ years in my computer. Note that I didn't put much effort to making this estimate. You can find the benchmarking [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-3/sha512-n-birthday/benches/my_benchmark.rs). Note that I used 10 trials instead of 5 for each.
 
 ```
 Benchmarking sha-512-8/birthday-attack: Collecting 10 samples in estimated 5.0000 s (2.4M iterat                                                                                                sha-512-8/birthday-attack                        
@@ -60,3 +61,9 @@ Found 2 outliers among 10 measurements (20.00%)
   1 (10.00%) high mild
   1 (10.00%) high severe
 ```
+
+**Exercise 5.4** Let SHA-512-n be as in the previous exercise. Write a program that finds a message M that hashes to the following value under SHA-512-16 (in hex):  `3D 4B`. How many tries would you expect the algorithm to need? Running the algorithm 5 times, How many tries did it take on average?
+
+> **Solution:**
+>
+> I think it would take, on average, $2^{16} = 65536$ tries. In my 5 trials [here](https://github.com/srdtrk/open-cryptography-course/blob/main/session-3/sha512-n-birthday/src/lib.rs), I got an average of 84962 tries.
